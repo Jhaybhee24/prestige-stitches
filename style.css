@@ -1,0 +1,165 @@
+/* CSS VARIABLES: Colors & Themes */
+:root {
+  --bg-color: #0f172a;
+  --card-bg: #1e293b;
+  --text-color: #f8fafc;
+  --subtext-color: #94a3b8;
+  --primary-color: #f59e0b; /* Gold accent for luxury fashion */
+  --border-color: #334155;
+  --star-color: #f59e0b;
+}
+
+body.light-theme {
+  --bg-color: #fafafa;
+  --card-bg: #ffffff;
+  --text-color: #18181b;
+  --subtext-color: #71717a;
+  --primary-color: #d97706;
+  --border-color: #e4e4e7;
+}
+
+/* GENERAL STYLES */
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background-color: var(--bg-color);
+  color: var(--text-color);
+  margin: 0;
+  padding: 0;
+  line-height: 1.6;
+  transition: background-color 0.3s, color 0.3s;
+}
+
+/* NAVIGATION */
+header {
+  background-color: var(--card-bg);
+  border-bottom: 2px solid var(--border-color);
+  padding: 15px 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+.logo {
+  font-size: 22px;
+  font-weight: bold;
+  color: var(--primary-color);
+  letter-spacing: 1px;
+}
+
+nav a {
+  color: var(--text-color);
+  text-decoration: none;
+  margin: 0 10px;
+  font-weight: 500;
+}
+
+nav a:hover {
+  color: var(--primary-color);
+}
+
+.theme-btn {
+  background: none;
+  border: 1px solid var(--border-color);
+  color: var(--text-color);
+  padding: 6px 12px;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+/* CONTAINER & CARDS */
+.container {
+  max-width: 1000px;
+  margin: 30px auto;
+  padding: 0 20px;
+}
+
+.card {
+  background-color: var(--card-bg);
+  padding: 25px;
+  border-radius: 10px;
+  border: 1px solid var(--border-color);
+  margin-bottom: 20px;
+}
+
+h1, h2, h3 {
+  color: var(--primary-color);
+}
+
+/* HERO BANNER */
+.hero {
+  text-align: center;
+  padding: 50px 20px;
+  background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('https://images.unsplash.com/photo-1558769132-cb1aea458c5e?q=80&w=800') center/cover;
+  border-radius: 12px;
+  color: white;
+  margin-bottom: 30px;
+}
+
+.hero h1 {
+  color: #ffffff;
+  font-size: 32px;
+}
+
+/* GALLERY GRID & PRODUCT CARDS */
+.gallery-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 20px;
+}
+
+.product-card {
+  background-color: var(--card-bg);
+  border: 1px solid var(--border-color);
+  border-radius: 10px;
+  overflow: hidden;
+  text-align: center;
+  padding-bottom: 15px;
+}
+
+.product-card img {
+  width: 100%;
+  height: 250px;
+  object-fit: cover;
+}
+
+/* RATING SYSTEM */
+.stars {
+  color: var(--star-color);
+  font-size: 20px;
+  cursor: pointer;
+}
+
+/* FORMS */
+input, textarea {
+  width: 100%;
+  padding: 10px;
+  margin: 8px 0 18px 0;
+  border-radius: 6px;
+  border: 1px solid var(--border-color);
+  background-color: var(--bg-color);
+  color: var(--text-color);
+  box-sizing: border-box;
+}
+
+.btn-primary {
+  background-color: var(--primary-color);
+  color: #000;
+  font-weight: bold;
+  border: none;
+  padding: 12px 24px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+/* FOOTER */
+footer {
+  text-align: center;
+  padding: 20px;
+  color: var(--subtext-color);
+  border-top: 1px solid var(--border-color);
+  margin-top: 40px;
+}
