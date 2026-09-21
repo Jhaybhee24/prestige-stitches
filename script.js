@@ -1,4 +1,4 @@
-// Function: Toggle Light / Dark Theme across pages
+// Function: Toggle Light / Dark Theme across all pages
 function toggleTheme() {
   document.body.classList.toggle('light-theme');
   const isLight = document.body.classList.contains('light-theme');
@@ -15,15 +15,41 @@ window.onload = function() {
   loadSavedOutfits();
 };
 
-// Designer Phone Number for WhatsApp Orders (Replace with your actual phone number with country code)
+// Official Designer WhatsApp Phone Number (International Format: 234 + 8086714154)
 const DESIGNER_PHONE = "2348086714154";
 
-// Function: Owner Upload New Male / Unisex Outfit
+// Secret Admin Passcode for Designer Portal
+const DESIGNER_PASSCODE = "prestige2026";
+
+// Function: Prompt for password and toggle portal visibility
+function unlockDesignerPortal(event) {
+  event.preventDefault();
+  
+  const portal = document.getElementById('designerPortal');
+  if (!portal) return;
+
+  if (portal.style.display === "block") {
+    portal.style.display = "none";
+    alert("Designer Portal hidden.");
+    return;
+  }
+
+  const userPassword = prompt("Enter Designer Passcode to access upload form:");
+
+  if (userPassword === DESIGNER_PASSCODE) {
+    portal.style.display = "block";
+    alert("Access granted! You can now publish new garments to the gallery.");
+    portal.scrollIntoView({ behavior: 'smooth' });
+  } else if (userPassword !== null) {
+    alert("Incorrect passcode! Access denied.");
+  }
+}
+
+// Function: Designer Upload New Male / Unisex Outfit
 function handleProductUpload(event) {
   event.preventDefault();
 
   const title = document.getElementById('garmentTitle').value;
-  // Default fallback image if no URL is provided (Male/Unisex suit style)
   const image = document.getElementById('garmentImg').value || 'https://images.unsplash.com/photo-1507679799987-c73779587ccf?q=80&w=800';
   const desc = document.getElementById('garmentDesc').value;
 
@@ -34,12 +60,10 @@ function handleProductUpload(event) {
 
   const newGarment = { title, image, desc, rating: "5.0" };
 
-  // Save to LocalStorage array so uploads persist across reloads
   let existingOutfits = JSON.parse(localStorage.getItem('customOutfits')) || [];
   existingOutfits.unshift(newGarment);
   localStorage.setItem('customOutfits', JSON.stringify(existingOutfits));
 
-  // Display card immediately
   renderGarmentCard(newGarment, true);
 
   document.getElementById('uploadForm').reset();
@@ -78,7 +102,7 @@ function loadSavedOutfits() {
   savedOutfits.forEach(garment => renderGarmentCard(garment, false));
 }
 
-// Function: Interactive Rating System
+// Function: Interactive Star Rating System
 function rateProduct(element) {
   let userRating = prompt("Rate this design from 1 to 5 stars:", "5");
   let ratingNum = parseInt(userRating);
@@ -92,22 +116,44 @@ function rateProduct(element) {
   }
 }
 
-// Function: Contact Form Validation
+// Function: Process Bespoke Measurement & Contact Submission to WhatsApp
 function handleContactSubmit(event) {
   event.preventDefault();
-  
+
   const name = document.getElementById('contactName').value;
   const email = document.getElementById('contactEmail').value;
-  const msg = document.getElementById('contactMsg').value;
+  const garment = document.getElementById('garmentType') ? document.getElementById('garmentType').value : 'General Inquiry';
+  const chest = document.getElementById('chestSize') ? document.getElementById('chestSize').value : 'N/A';
+  const waist = document.getElementById('waistSize') ? document.getElementById('waistSize').value : 'N/A';
+  const shoulder = document.getElementById('shoulderSize') ? document.getElementById('shoulderSize').value : 'N/A';
+  const sleeve = document.getElementById('sleeveSize') ? document.getElementById('sleeveSize').value : 'N/A';
+  const notes = document.getElementById('contactMsg').value || 'None';
   const status = document.getElementById('contactStatus');
 
-  if (!name || !email || !msg) {
-    status.innerText = "Please complete all fields!";
+  if (!name || !email) {
+    status.innerText = "Please complete your name and contact details!";
     status.style.color = "#ef4444";
     return;
   }
 
-  status.innerText = `Thank you, ${name}! Your consultation request has been received.`;
+  // Format WhatsApp Message
+  const textMessage = `Hello Prestige Stitches!%0A%0A*New Bespoke Order Inquiry*%0A` +
+    `👤 *Name:* ${encodeURIComponent(name)}%0A` +
+    `📞 *Contact:* ${encodeURIComponent(email)}%0A` +
+    `✂️ *Garment Style:* ${encodeURIComponent(garment)}%0A%0A` +
+    `📐 *Measurements (Inches):*%0A` +
+    `- Chest: ${chest}"%0A` +
+    `- Waist: ${waist}"%0A` +
+    `- Shoulder: ${shoulder}"%0A` +
+    `- Sleeve: ${sleeve}"%0A%0A` +
+    `📝 *Additional Notes:* ${encodeURIComponent(notes)}`;
+
+  const whatsappLink = `https://wa.me/${DESIGNER_PHONE}?text=${textMessage}`;
+
+  status.innerText = `Redirecting ${name} to WhatsApp to send measurements...`;
   status.style.color = "#22c55e";
-  document.getElementById('contactForm').reset();
+
+  setTimeout(() => {
+    window.open(whatsappLink, '_blank');
+  }, 1000);
 }
