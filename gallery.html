@@ -25,15 +25,16 @@
     <h1>Male & Unisex Collection</h1>
     <p>Browse our handcrafted bespoke suits, traditional Senator wear, and unisex designs. Tap stars to rate any design!</p>
 
-    <!-- Hidden Designer Upload Portal -->
+    <!-- Designer Upload Portal -->
     <div id="designerPortal" class="card" style="display: none; border: 2px solid #f59e0b; margin-bottom: 30px;">
       <h2>Designer Portal: Upload New Garment</h2>
       <form id="uploadForm" onsubmit="handleProductUpload(event)">
         <label for="garmentTitle">Garment Name</label>
         <input type="text" id="garmentTitle" placeholder="e.g., Grand Royal Agbada / Unisex Senator Suit" required>
 
-        <label for="garmentImg">Image URL</label>
-        <input type="url" id="garmentImg" placeholder="Paste image web link (or leave blank for default)">
+        <!-- Changed from URL input to Direct File Upload Input -->
+        <label for="garmentFile">Select Outfit Photo</label>
+        <input type="file" id="garmentFile" accept="image/*" required style="padding: 8px; background: #1e293b; color: white; border-radius: 6px; width: 100%; margin-bottom: 12px;">
 
         <label for="garmentDesc">Description & Details</label>
         <textarea id="garmentDesc" rows="3" placeholder="Fabric details, sizing options, custom embroidery notes..." required></textarea>
