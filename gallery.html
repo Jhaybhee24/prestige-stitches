@@ -1,9 +1,9 @@
-<<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Fashion Gallery - Prestige Stitches</title>
+  <title>Gallery - Prestige Stitches</title>
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -20,50 +20,54 @@
   </header>
 
   <div class="container">
-    <!-- Owner Upload Section -->
-    <div class="card">
-      <h2>Designer Portal: Advertise Male & Unisex Wears</h2>
+    
+    <!-- Customer Catalogue Title -->
+    <h1>Male & Unisex Collection</h1>
+    <p>Browse our handcrafted bespoke suits, traditional Senator wear, and unisex designs. Tap stars to rate any design!</p>
+
+    <!-- Hidden Designer Upload Portal -->
+    <div id="designerPortal" class="card" style="display: none; border: 2px solid #f59e0b; margin-bottom: 30px;">
+      <h2>Designer Portal: Upload New Garment</h2>
       <form id="uploadForm" onsubmit="handleProductUpload(event)">
         <label for="garmentTitle">Garment Name</label>
-        <input type="text" id="garmentTitle" placeholder="e.g., Grand Royal Agbada / Unisex Senator Suit">
+        <input type="text" id="garmentTitle" placeholder="e.g., Grand Royal Agbada / Unisex Senator Suit" required>
 
         <label for="garmentImg">Image URL</label>
         <input type="url" id="garmentImg" placeholder="Paste image web link (or leave blank for default)">
 
         <label for="garmentDesc">Description & Details</label>
-        <textarea id="garmentDesc" rows="3" placeholder="Fabric details, sizing options, custom embroidery notes..."></textarea>
+        <textarea id="garmentDesc" rows="3" placeholder="Fabric details, sizing options, custom embroidery notes..." required></textarea>
 
-        <button type="submit" class="btn-primary">Publish Garment</button>
+        <button type="submit" class="btn-primary" style="margin-top:10px;">Publish Garment</button>
       </form>
     </div>
 
-    <!-- Product Showcase Display -->
-    <h2>Male & Unisex Collection (Tap stars to rate)</h2>
+    <!-- Public Product Gallery Grid -->
     <div class="gallery-grid" id="galleryGrid">
       
-      <!-- Default Male Outfit -->
+      <!-- Static Design 1 -->
       <div class="product-card">
-        <img src="https://images.unsplash.com/photo-1594938298603-c8148c4dae35?q=80&w=800" alt="Executive Bespoke Suit">
+        <img src="https://images.unsplash.com/photo-1507679799987-c73779587ccf?q=80&w=800" alt="Executive Bespoke Suit">
         <h3>Executive Bespoke Suit (Male)</h3>
         <p>Hand-crafted 3-piece tailored suit designed for weddings and corporate excellence.</p>
         <div class="stars" onclick="rateProduct(this)">⭐⭐⭐⭐⭐ (5.0)</div>
-        <a href="https://wa.me/2348086714154?text=Hello%20Prestige%20Stitches,%20I%20would%20like%20to%20order/inquire%20about%20the%20Executive%20Bespoke%20Suit." target="_blank" style="display:inline-block; margin-top:12px; padding:10px 18px; background-color:#22c55e; color:white; text-decoration:none; border-radius:6px; font-weight:bold;">Order on WhatsApp</a>
+        <a href="https://wa.me/2348086714154?text=Hello%20Prestige%20Stitches,%20I%20want%20to%20order%20the%20Executive%20Bespoke%20Suit" target="_blank" style="display:inline-block; margin-top:12px; padding:10px 18px; background-color:#22c55e; color:white; text-decoration:none; border-radius:6px; font-weight:bold;">Order on WhatsApp</a>
       </div>
 
-      <!-- Default Unisex Outfit -->
+      <!-- Static Design 2 -->
       <div class="product-card">
-        <img src="https://images.unsplash.com/photo-1521572267360-ee0c2909d518?q=80&w=800" alt="Unisex Luxury Senator Wear">
-        <h3>Luxury Senator Wear (Unisex)</h3>
-        <p>Sleek, minimalist native outfit crafted with high-grade Cashmere fabric.</p>
+        <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?q=80&w=800" alt="Unisex Senator Wear">
+        <h3>Signature Unisex Senator Wear</h3>
+        <p>Premium tailored traditional attire crafted for sharp male and unisex fits.</p>
         <div class="stars" onclick="rateProduct(this)">⭐⭐⭐⭐⭐ (5.0)</div>
-        <a href="https://wa.me/2348086714154?text=Hello%20Prestige%20Stitches,%20I%20would%20like%20to%20order/inquire%20about%20the%20Luxury%20Senator%20Wear." target="_blank" style="display:inline-block; margin-top:12px; padding:10px 18px; background-color:#22c55e; color:white; text-decoration:none; border-radius:6px; font-weight:bold;">Order on WhatsApp</a>
+        <a href="https://wa.me/2348086714154?text=Hello%20Prestige%20Stitches,%20I%20want%20to%20order%20the%20Signature%20Unisex%20Senator%20Wear" target="_blank" style="display:inline-block; margin-top:12px; padding:10px 18px; background-color:#22c55e; color:white; text-decoration:none; border-radius:6px; font-weight:bold;">Order on WhatsApp</a>
       </div>
 
     </div>
   </div>
 
   <footer>
-    <p>&copy; 2026 Prestige Stitches. All rights reserved.</p>
+    <p>&copy; 2026 Prestige Stitches. All rights reserved. | <a href="#" onclick="unlockDesignerPortal(event)" style="color:#888; text-decoration:none;">Designer Login</a></p>
   </footer>
 
   <script src="script.js"></script>
