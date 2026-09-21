@@ -15,7 +15,7 @@ window.onload = function() {
   loadSavedOutfits();
 };
 
-// Official Designer WhatsApp Phone Number (International Format: 234 + 8086714154)
+// Official Designer WhatsApp Phone Number
 const DESIGNER_PHONE = "2348086714154";
 
 // Secret Admin Passcode for Designer Portal
@@ -45,29 +45,40 @@ function unlockDesignerPortal(event) {
   }
 }
 
-// Function: Designer Upload New Male / Unisex Outfit
+// Function: Designer Upload New Garment with Local File Reader
 function handleProductUpload(event) {
   event.preventDefault();
 
   const title = document.getElementById('garmentTitle').value;
-  const image = document.getElementById('garmentImg').value || 'https://images.unsplash.com/photo-1507679799987-c73779587ccf?q=80&w=800';
+  const fileInput = document.getElementById('garmentFile');
   const desc = document.getElementById('garmentDesc').value;
 
-  if (!title || !desc) {
-    alert("Please enter a garment title and description!");
+  if (!title || !desc || !fileInput.files[0]) {
+    alert("Please select a photo file and complete all fields!");
     return;
   }
 
-  const newGarment = { title, image, desc, rating: "5.0" };
+  const file = fileInput.files[0];
+  const reader = new FileReader();
 
-  let existingOutfits = JSON.parse(localStorage.getItem('customOutfits')) || [];
-  existingOutfits.unshift(newGarment);
-  localStorage.setItem('customOutfits', JSON.stringify(existingOutfits));
+  // Read selected image file as a Data URL
+  reader.onload = function(e) {
+    const imageSrc = e.target.result;
+    const newGarment = { title, image: imageSrc, desc, rating: "5.0" };
 
-  renderGarmentCard(newGarment, true);
+    // Save to local storage array
+    let existingOutfits = JSON.parse(localStorage.getItem('customOutfits')) || [];
+    existingOutfits.unshift(newGarment);
+    localStorage.setItem('customOutfits', JSON.stringify(existingOutfits));
 
-  document.getElementById('uploadForm').reset();
-  alert("Male/Unisex outfit successfully published and saved to gallery!");
+    // Render newly created card to the gallery grid
+    renderGarmentCard(newGarment, true);
+
+    document.getElementById('uploadForm').reset();
+    alert("Garment photo and details successfully published!");
+  };
+
+  reader.readAsDataURL(file);
 }
 
 // Helper Function: Render Product Card to DOM
@@ -156,4 +167,5 @@ function handleContactSubmit(event) {
   setTimeout(() => {
     window.open(whatsappLink, '_blank');
   }, 1000);
-}
+      }
+                                                                               
